@@ -49,14 +49,13 @@ DEBUG = True
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.mysql",
-        "NAME": APP_CODE,  # noqa
+        "NAME": "transfer",  # noqa
         "USER": "root",
-        "PASSWORD": "",
-        "HOST": "localhost",
+        "PASSWORD": "1qaz@WSX",
+        "HOST": "47.116.223.101",
         "PORT": "3306",
     },
 }
-
 # 前后端开发模式下支持跨域配置
 if FRONTEND_BACKEND_SEPARATION:
     INSTALLED_APPS += ("corsheaders",)

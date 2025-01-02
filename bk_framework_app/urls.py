@@ -12,6 +12,7 @@ specific language governing permissions and limitations under the License.
 """
 
 from django.urls import re_path
+from . import save_and_search
 
 from . import views
 
@@ -19,4 +20,7 @@ urlpatterns = (
     re_path(r"^$", views.home),
     re_path(r"^dev-guide/$", views.dev_guide),
     re_path(r"^contact/$", views.contact),
+    re_path(r'^api/network_devices/update$', save_and_search.update_local_file),
+    re_path(r'^api/network_devices/get_info_by_ip$', save_and_search.get_info_by_ip),
+    re_path(r'^hello/$', views.hello),
 )

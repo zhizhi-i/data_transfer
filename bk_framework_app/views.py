@@ -12,6 +12,9 @@ specific language governing permissions and limitations under the License.
 """
 
 from django.shortcuts import render
+from django.http import JsonResponse
+from blueapps.account.decorators import login_exempt
+
 
 
 # 开发框架中通过中间件默认是需要登录态的，如有不需要登录的，可添加装饰器login_exempt
@@ -35,3 +38,7 @@ def contact(request):
     联系页
     """
     return render(request, "bk_framework_app/contact.html")
+
+@login_exempt
+def hello(request):
+    return JsonResponse({"hello": "world"})
