@@ -18,7 +18,8 @@ from django.views.decorators.http import require_http_methods
 # 获取当天日期的文件名
 def get_filename():
     today_str = datetime.now().strftime("%Y-%m-%d")
-    base_path = os.getenv("CACHE_PATH", "./")  # 从环境变量获取文件路径，默认为当前目录
+    base_path = os.environ.get("CACHE_PATH", "./")  # 从环境变量获取文件路径，默认为当前目录
+    logger.error(f"文件存放目录:{base_path}")
     return os.path.join(base_path, f"librenms_{today_str}.json")
 
 
