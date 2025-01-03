@@ -6,22 +6,12 @@ from blueapps.utils.logger import logger
 import concurrent.futures
 from collections import defaultdict
 import re
-
-
-# 定义API的URL和认证信息
-base_url = "http://librenms.polar.com/api/v0"
-api_token = '67ae076b7de19d7dedc09498d647f05b'
-
-# 设置请求头
-headers = {
-    'X-Auth-Token': api_token,
-    'Accept': 'application/json'
-}
+from django.conf import settings
 
 
 class GetLibrenmsInfo(object):
-    base_url = "http://librenms.polar.com/api/v0"
-    api_token = '67ae076b7de19d7dedc09498d647f05b'
+    base_url = settings.LIBRENMS_API_URL
+    api_token = settings.LIBRENMS_API_TOKEN
     headers = {
         'X-Auth-Token': api_token,
         'Accept': 'application/json'
@@ -126,7 +116,7 @@ class GetLibrenmsInfo(object):
         all_ports_info = defaultdict(list)
 
         def get_port_info(port_id):
-            port_url = f"{base_url}/ports/{port_id}"
+            port_url = f"{self.base_url}/ports/{port_id}"
             response = self._request(url=port_url, method="get")
             ports_info = response.get("port", [])
             
@@ -138,7 +128,7 @@ class GetLibrenmsInfo(object):
                     continue
                 
                 # 获取光模块信息
-                trans_url = f"{base_url}/ports/{port_id}/transceiver"
+                trans_url = f"{self.base_url}/ports/{port_id}/transceiver"
                 trans_response = self._request(url=trans_url, method="get")
                 trans_info = trans_response.get("transceivers", [])
                 
@@ -195,7 +185,7 @@ class GetLibrenmsInfo(object):
     def get_base_info(self,device_id):
         url = f"{self.base_url}/devices/{device_id}"
         response = self._request(url=url,method="get")
-        device_info =response.get("devices",[])[0]
+        device_info = response.get("devices",[])[0]
         return {
             "SN": device_info.get("serial",""),
             "type": device_info.get("hardware",""),
@@ -204,38 +194,38 @@ class GetLibrenmsInfo(object):
     
     # 引擎板暂无获取逻辑
     def get_engine_info(self):
-        return {
+        return [{
             "engineSN": "",
             "engineNum": "",
             "engineGroove": "",
             "engineStatus": ""           
-        }
+        }]
     
     # 业务板暂无获取逻辑
     def get_business_info(self):
-        return {
+        return [{
             "businessSN": "",
             "businessNum": "",
             "businessGroove": "",
             "businessStatus": ""        
-        }
+        }]
     
     # 交换板暂无获取逻辑
     def get_exchange_info(self):
-        return {
+        return [{
             "exchangeSN": "",
             "exchangeNum": "",
             "exchangeGroove": "",
             "exchangeStatus": ""     
-        }
+        }]
     
     # IB信息,librenms无IB设备信息
     def get_ib_info(self):
-        return {
+        return [{
             "SN": "",
             "LID": "",
             "GUID": ""  
-        }
+        }]
     
     # 数据组装
     def assembly_data(self):

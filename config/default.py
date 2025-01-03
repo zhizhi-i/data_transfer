@@ -108,6 +108,12 @@ LOGGING = get_logging_config_dict(locals())
 INIT_SUPERUSER = []
 
 
+#新增环境变量
+LIBRENMS_API_URL = os.environ.get("LIBRENMS_API_URL")
+LIBRENMS_API_TOKEN = os.environ.get("LIBRENMS_API_TOKEN")
+LOCAL_CAHCA_PATH = os.environ.get("LOCAL_CAHCA_PATH")
+
+
 # 使用mako模板时，默认打开的过滤器：h(过滤html)
 MAKO_DEFAULT_FILTERS = ["h"]
 
