@@ -119,7 +119,6 @@ class GetLibrenmsInfo(object):
         ports_info = response.get("ports",[])
         # 获取所有端口的id
         ports_id_list = [port_info["port_id"] for port_info in ports_info]
-        logger.info(f"get_ports_list:{ports_id_list}")
         return ports_id_list
 
     # 返回所有端口信息，并根据设备id分组
@@ -180,7 +179,7 @@ class GetLibrenmsInfo(object):
                     device_id, port_data_list = future.result()
                     all_ports_info[device_id].extend(port_data_list)
                 except Exception as e:
-                    print(f"Error fetching port data: {e}")
+                    logger.error(f"Error fetching port data:{e}")
 
         return all_ports_info
     
