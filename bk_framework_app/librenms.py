@@ -43,8 +43,10 @@ class GetLibrenmsInfo(object):
             response.raise_for_status()  
             return response.json() 
         except requests.RequestException as e:
+            logger.error(f"request error:{str(e)}")
             return {'result':False, 'error':'请求错误','message': str(e)}
         except Exception as e:
+            logger.error(f"request error:{str(e)}")
             return {'result':False, 'error':'未知错误','message': str(e)}
 
     # 格式化输出名称和编号
@@ -117,6 +119,7 @@ class GetLibrenmsInfo(object):
         ports_info = response.get("ports",[])
         # 获取所有端口的id
         ports_id_list = [port_info["port_id"] for port_info in ports_info]
+        logger.info(f"get_ports_list:{ports_id_list}")
         return ports_id_list
 
     # 返回所有端口信息，并根据设备id分组

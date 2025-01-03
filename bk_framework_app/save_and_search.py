@@ -26,10 +26,10 @@ def get_filename():
 def update_device_info():
     librenms_info = GetLibrenmsInfo()
     librenms_devices_info = librenms_info.assembly_data()
+    logger.error(f"librenms all data:{librenms_devices_info}")
     return librenms_devices_info
 
 # 更新文件，每天生成以当天日期命名的文件
-
 @login_exempt
 def update_local_file(request):
     filename = get_filename()
