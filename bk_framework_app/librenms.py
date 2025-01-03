@@ -162,7 +162,7 @@ class GetLibrenmsInfo(object):
                 })
             return device_id,result
 
-        with concurrent.futures.ThreadPoolExecutor(max_workers=20) as executor:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
             future_to_port = {executor.submit(get_port_info, port_id): port_id for port_id in ports_id_list}
             for future in concurrent.futures.as_completed(future_to_port):
                 try:

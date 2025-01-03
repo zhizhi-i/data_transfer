@@ -33,24 +33,24 @@ def update_device_info():
 @login_exempt
 def update_local_file(request):
     filename = get_filename()
-    logger.info(f"cache file name:{filename}")
+    logger.info(f"start update {filename}")
     try:
         # 更新文件内容
         devices_info = update_device_info()
         with open(filename, "w", encoding="utf-8") as f:
             json.dump(devices_info, f, indent=4, ensure_ascii=False)
-        # print(f"端口信息已成功更新并保存到文件：{filename}")
+
+        logger.info(f"update {filename} end,successed")
         return JsonResponse({
             "result": True,
             "message": "已缓存最新的librenms数据"
             })
     except Exception as e:
-        # print(f"更新文件时出错：{e}")
+        logger.error(f"update {filename} failed,message: {e}")
         return JsonResponse({
             "result": False,
             "message": f"更新文件时出错：{e}"
             })
-
 
 # 读取文件并返回内容
 def read_file_content():
