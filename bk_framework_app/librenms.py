@@ -253,4 +253,5 @@ class GetLibrenmsInfo(object):
                 }
             })
         
+        logger.info(f"assembly end data length: {len(devices_info)}")
         return devices_info
