@@ -37,7 +37,7 @@ INSTALLED_APPS += (
     "bk_framework_app",
     "rest_framework",
     "drf_yasg",
-    
+    "django_cron",
 )
 
 # 这里是默认的中间件，大部分情况下，不需要改动
@@ -86,7 +86,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 # worker: python manage.py celery worker -l info
 # beat: python manage.py celery beat -l info
 # 不使用时，请修改为 False，并删除项目目录下的 Procfile 文件中 celery 配置
-IS_USE_CELERY = False
+IS_USE_CELERY = True
 
 # 前后端分离开发配置开关，设置为True时dev和stag环境会自动加载允许跨域的相关选项
 FRONTEND_BACKEND_SEPARATION = True
@@ -125,6 +125,7 @@ IS_AJAX_PLAIN_MODE = False
 
 # 国际化配置
 LOCALE_PATHS = (os.path.join(BASE_DIR, "locale"),)
+
 
 USE_TZ = True
 TIME_ZONE = "Asia/Shanghai"

@@ -104,6 +104,7 @@ class GetLibrenmsInfo(object):
     
     # 获取所有端口信息
     def _get_all_ports(self):
+        logger.info(f"start search ports list")
         url = f"{self.base_url}/ports"  
         response = self._request(url=url,method="get")
         ports_info = response.get("ports",[])
@@ -113,6 +114,7 @@ class GetLibrenmsInfo(object):
 
     # 返回所有端口信息，并根据设备id分组
     def get_ports_info(self,ports_id_list):
+        logger.info(f"start search ports info")
         all_ports_info = defaultdict(list)
 
         def get_port_info(port_id):
@@ -160,6 +162,7 @@ class GetLibrenmsInfo(object):
                     },
                     "opticalModuleInfo": trans_info_list
                 })
+            logger.info(f"device_info: {result}")
             return device_id,result
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:

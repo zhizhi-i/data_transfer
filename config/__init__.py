@@ -19,6 +19,7 @@ import os
 # Django starts so that shared_task will use this app.
 from blueapps.core.celery import celery_app
 
+
 __all__ = ["celery_app", "RUN_VER", "APP_CODE", "SECRET_KEY", "BK_URL", "BASE_DIR"]
 
 

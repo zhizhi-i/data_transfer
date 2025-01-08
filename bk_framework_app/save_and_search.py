@@ -30,8 +30,7 @@ def update_device_info():
     return librenms_devices_info
 
 # 更新文件，每天生成以当天日期命名的文件
-@login_exempt
-def update_local_file(request):
+def update_local_file():
     filename = get_filename()
     logger.info(f"start update {filename}")
     try:
@@ -41,16 +40,16 @@ def update_local_file(request):
             json.dump(devices_info, f, indent=4, ensure_ascii=False)
 
         logger.info(f"update {filename} end,successed")
-        return JsonResponse({
+        return {
             "result": True,
             "message": "已缓存最新的librenms数据"
-            })
+            }
     except Exception as e:
         logger.error(f"update {filename} failed,message: {e}")
-        return JsonResponse({
+        return {
             "result": False,
             "message": f"更新文件时出错：{e}"
-            })
+            }
 
 # 读取文件并返回内容
 def read_file_content():
