@@ -9,4 +9,4 @@ module:
     worker:
       command: celery -A config worker --loglevel=info
     beat:
-      command: celery -A config beat --loglevel=info
+      command: celery -A config worker --loglevel=info --concurrency=4 --autoscale=10,3 --prefetch-multiplier=1
