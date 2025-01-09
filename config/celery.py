@@ -25,7 +25,7 @@ app.conf.enable_utc = False
 app.conf.beat_schedule = {
     'low-task': {
         'task': 'config.cron_update.update_file',
-        'schedule': timedelta(minutes=interval_time),
+        'schedule': timedelta(minutes=int(interval_time)),
         'args': (),
     }
 }
