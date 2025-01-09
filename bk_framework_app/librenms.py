@@ -162,7 +162,7 @@ class GetLibrenmsInfo(object):
                     },
                     "opticalModuleInfo": trans_info_list
                 })
-            logger.info(f"device_info: {result}")
+            logger.debug(f"device_info: {result}")
             return device_id,result
 
         with concurrent.futures.ThreadPoolExecutor(max_workers=15) as executor:
@@ -256,5 +256,5 @@ class GetLibrenmsInfo(object):
                 }
             })
         
-        logger.info(f"assembly end data length: {len(devices_info)}")
+        logger.debug(f"assembly end data length: {len(devices_info)}")
         return devices_info

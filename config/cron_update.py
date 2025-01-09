@@ -6,7 +6,6 @@ import datetime
 
 @app.task
 def update_file():
-    # 你的任务逻辑
     logger.info(f"{datetime.datetime.now()} - start update local file")
     update_local_file()
     logger.info(f"{datetime.datetime.now()} - end update local file")
