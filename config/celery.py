@@ -14,7 +14,6 @@ interval_time = settings.INTERVAL_TIME
 # 设置为 celery 后端消息队列
 BROKER_URL = f'amqp://{user}:{password}@{host}:{port}/{vhost}'
 
-# 开发环境 BROKER_URL = "amqp://transfer:transfer@47.116.223.101:5672/transfer"
 
 app = Celery('app',broker=BROKER_URL,include=['config.cron_update'])
 app.conf.timezone = 'Asia/Shanghai'
