@@ -7,6 +7,6 @@ module:
     web:
       command: gunicorn wsgi -w 4 -b [::]:${PORT:-5000} --access-logfile - --error-logfile - --access-logformat '[%(h)s] %({request_id}i)s %(u)s %(t)s "%(r)s" %(s)s %(D)s %(b)s "%(f)s" "%(a)s"'
     worker:
-      command: celery -A config worker --loglevel=info
-    beat:
       command: celery -A config worker --loglevel=info --concurrency=4 --autoscale=10,3 --prefetch-multiplier=1
+    beat:
+      command: celery -A config beat --loglevel=info
